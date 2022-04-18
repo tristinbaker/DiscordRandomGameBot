@@ -1,0 +1,25 @@
+{
+  "name": "discordrandomgamebot",
+  "version": "1.0.0",
+  "description": "Discord bot to suggest random game from user's library.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tristinbaker/DiscordRandomGameBot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "steam",
+    "game"
+  ],
+  "author": "Tristin Baker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tristinbaker/DiscordRandomGameBot/issues"
+  },
+  "homepage": "https://github.com/tristinbaker/DiscordRandomGameBot#readme"
+}
