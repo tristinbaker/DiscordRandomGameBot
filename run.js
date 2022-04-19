@@ -7,7 +7,7 @@ const game = new Game();
 client.login("DISCORD BOT TOKEN GOES HERE");
 
 client.once('ready', () => {
-	console.log('Bot ready!');
+  console.log('Bot ready!');
 });
 
 client.on("messageCreate", (message) => {
