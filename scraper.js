@@ -10,11 +10,11 @@ class Scraper {
 			await page.goto(this.url);
 			page.waitForSelector('.gameListRowItemName');
 			var games = await page.evaluate(() => {
-		    let data = [];
-		    let gameList = document.getElementsByClassName('gameListRowItemName');
-		    for (var game of gameList)
-		        data.push(game.textContent);
-		    return data;
+				let data = [];
+				let gameList = document.getElementsByClassName('gameListRowItemName');
+				for (var game of gameList)
+					data.push(game.textContent);
+				return data;
 			});
 			await browser.close();
 		} catch (error) {
