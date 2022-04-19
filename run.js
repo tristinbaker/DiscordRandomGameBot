@@ -4,7 +4,7 @@ const Game = require('./game.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]});
 const game = new Game();
 
-client.login("DISCORD BOT TOKEN");
+client.login("DISCORD BOT TOKEN GOES HERE");
 
 client.once('ready', () => {
 	console.log('Bot ready!');
