@@ -11,14 +11,14 @@ client.once('ready', () => {
 });
 
 client.on("messageCreate", (message) => {
-	if(message.content == ";;game"){
-			let user = message.member.user.discriminator;
-  		let user_name = message.member.nickname === null ? message.author.username : message.member.nickname;
-			message.channel.send("Retrieving Game...")
-			.then((msg) => {
-				game.getRandomGame(user).then((user_game) => {
-					msg.edit(`${user_name}, you should play ${user_game}.`);
-				});
-			});
-		}
+  if(message.content == ";;game"){
+    let user = message.member.user.discriminator;
+      let user_name = message.member.nickname === null ? message.author.username : message.member.nickname;
+      message.channel.send("Retrieving Game...")
+        .then((msg) => {
+          game.getRandomGame(user).then((user_game) => {
+          msg.edit(`${user_name}, you should play ${user_game}.`);
+        });
+      });
+    }
 });
