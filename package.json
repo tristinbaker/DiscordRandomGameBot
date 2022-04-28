@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/tristinbaker/DiscordRandomGameBot#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "discord.js": "^13.6.0",
+    "howlongtobeat": "^1.5.0",
     "puppeteer": "^13.5.2"
   }
 }
