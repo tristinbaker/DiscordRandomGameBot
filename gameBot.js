@@ -2,11 +2,15 @@ const { MessageEmbed, Client, Intents } = require('discord.js');
 const Game = require('./game.js');
 const HLTB = require('./hltb.js');
 const ITAD = require('./itad.js');
+const GIB = require('./gamesIBeat.js');
+const Utils = require('./utils.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS] });
 const game = new Game();
 const hltb = new HLTB();
 const itad = new ITAD();
+const gib = new GIB();
+const utils = new Utils();
 
 client.login(BOT_TOKEN_HERE);
 
@@ -58,5 +62,65 @@ client.on("messageCreate", (message) => {
           message.channel.send({ embeds: [gameEmbed] });
         });
       });
+  } else if (message.content.startsWith(';;gib')) {
+    let year;
+    const request = message.content.slice(";;gib".length).trim().split(' ');
+    const isNum = utils.isNum(request[0]); // Likely year if true
+    if (isNum) {
+      year = request[0];
+    }
+    let user = message.member.user.id;
+    let user_name = message.member.nickname === null ? message.author.username : message.member.nickname;
+    if (year) { // Year passed in
+      message.channel.send(`Retrieving game list for ${user_name}...`)
+        .then((msg) => {
+          gib.getUserList(user, user_name, request)
+            .then((gameEmbed) => {
+              msg.delete();
+              message.channel.send({ embeds: [gameEmbed] });
+            });
+        });
+    } else if (request[0].toLowerCase() == 'lb') { // leaderboard option selected
+      year = request[1];
+      message.channel.send(`Retrieving leaderboard...`)
+        .then((msg) => {
+          if (year) {
+            gib.printLeaderboard(message, year)
+              .then((gameEmbed) => {
+                msg.delete();
+                message.channel.send({ embeds: [gameEmbed] });
+              });
+          } else {
+            gib.printLeaderboard(message)
+              .then((gameEmbed) => {
+                msg.delete();
+                message.channel.send({ embeds: [gameEmbed] });
+              });
+          }
+        });
+    } else if (request[0].toLowerCase() == 'add') {
+      let new_game = request.slice(1, request.length).join(' ');
+      message.channel.send(`Adding game...`)
+        .then((msg) => {
+          gib.addToList(user, new_game)
+            .then(() => {
+              msg.edit(`${new_game} Added!`);
+            });
+        });
+    } else if (request[0].toLowerCase() == 'help') {
+      gib.getHelpMessage()
+        .then((gameEmbed) => {
+          message.channel.send({ embeds: [gameEmbed] });
+        });
+    } else {
+      message.channel.send(`Retrieving game list for ${user_name}...`)
+        .then((msg) => {
+          gib.getUserList(user, user_name)
+            .then((gameEmbed) => {
+              msg.delete();
+              message.channel.send({ embeds: [gameEmbed] });
+            });
+        });
+    }
   }
 });

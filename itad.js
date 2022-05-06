@@ -2,7 +2,7 @@ const axios = require('axios');
 const { MessageEmbed } = require('discord.js');
 
 const ITAD_URL = 'https://api.isthereanydeal.com';
-const KEY = API_KEY_GOES_HERE;
+const KEY = '9e0dfc025db91f0b8b93f898c06cc03c1cf8bbd1';
 
 class IsThatADeal {
   constructor() {
